@@ -1,7 +1,5 @@
+
 #include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <ctype.h>
 
 // Function to count digits
 int countDigits(long long n)
@@ -14,20 +12,30 @@ int countDigits(long long n)
     while (n != 0)
     {
         count++;
-        n = n / 10;
+        n /= 10;
     }
 
     return count;
 }
 
-// Karatsuba Function
+// Function to calculate 10^n
+long long powerOf10(int n)
+{
+    long long result = 1;
+
+    for (int i = 0; i < n; i++)
+        result *= 10;
+
+    return result;
+}
+
+// Karatsuba Multiplication
 long long karatsuba(long long x, long long y)
 {
-    // Base Case
+    // Base case
     if (x < 10 || y < 10)
         return x * y;
 
-    // Find maximum number of digits
     int n1 = countDigits(x);
     int n2 = countDigits(y);
 
@@ -39,7 +47,7 @@ long long karatsuba(long long x, long long y)
 
     int m = n / 2;
 
-    long long power = pow(10, m);
+    long long power = powerOf10(m);
 
     // Split numbers
     long long a = x / power;
@@ -48,34 +56,79 @@ long long karatsuba(long long x, long long y)
     long long c = y / power;
     long long d = y % power;
 
-    // Recursive multiplication
-    long long z0 = karatsuba(b, d);
+    // Three recursive multiplications
+    long long P1 = karatsuba(a, c);
+    long long P2 = karatsuba(b, d);
+    long long P3 = karatsuba(a + b, c + d);
 
-    long long z1 = karatsuba(a + b, c + d);
-
-    long long z2 = karatsuba(a, c);
+    // Middle term
+    long long Middle = P3 - P1 - P2;
 
     // Final result
-    return z2 * pow(10, 2 * m)
-           + (z1 - z2 - z0) * power
-           + z0;
+    long long result =
+        P1 * powerOf10(2 * m)
+        + Middle * power
+        + P2;
+
+    return result;
 }
 
 int main()
 {
     long long x, y;
 
-    printf("Enter two numbers1: ");
-    scanf("%lld", &x);
-     if (!isInteger(x))
-    {
-        printf("Invalid input! Please enter an integer only.\n");
-        return 0;
-    }
-    printf("Enter two numbers2: ");
-    scanf("%lld", &y);
+    printf("Enter first number: ");
 
-    printf("Answer = %lld", karatsuba(x, y));
+    if (scanf("%lld", &x) != 1 || x < 0)
+    {
+        printf("Invalid input! Please enter a non-negative integer.\n");
+        return 1;
+    }
+
+    printf("Enter second number: ");
+
+    if (scanf("%lld", &y) != 1 || y < 0)
+    {
+        printf("Invalid input! Please enter a non-negative integer.\n");
+        return 1;
+    }
+
+    // Calculate digits and split values
+    int n1 = countDigits(x);
+    int n2 = countDigits(y);
+    int n = (n1 > n2) ? n1 : n2;
+
+    if (n % 2 != 0)
+        n++;
+
+    int m = n / 2;
+    long long power = powerOf10(m);
+
+    long long a = x / power;
+    long long b = x % power;
+    long long c = y / power;
+    long long d = y % power;
+
+    // Calculate P1, P2, P3
+    long long P1 = karatsuba(a, c);
+    long long P2 = karatsuba(b, d);
+    long long P3 = karatsuba(a + b, c + d);
+
+    long long Middle = P3 - P1 - P2;
+
+    long long finalResult =
+        P1 * powerOf10(2 * m)
+        + Middle * power
+        + P2;
+
+    // Display only the important intermediate results
+    printf("\nP1 = %lld\n", P1);
+    printf("P2 = %lld\n", P2);
+    printf("P3 = %lld\n", P3);
+    printf("Middle = P3 - P1 - P2 = %lld\n", Middle);
+
+    printf("\nFinal Result after multiplication using this algorithm\n = %lld\n",
+           finalResult);
 
     return 0;
 }
