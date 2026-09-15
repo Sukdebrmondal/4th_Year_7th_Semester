@@ -23,9 +23,35 @@ def test_empty_url():
 
 def test_valid_url():
 
-    valid, message = validate_url("https://example.com")
+    valid, message = validate_url(
+        "https://example.com"
+    )
 
     assert valid is True
+
+
+def test_whitespace_url_is_invalid():
+
+    normalized = normalize_url("hello world")
+
+    valid, message = validate_url(normalized)
+
+    assert valid is False
+
+    assert message == "URL cannot contain whitespace."
+
+
+def test_invalid_scheme():
+
+    valid, message = validate_url(
+        "ftp://example.com"
+    )
+
+    assert valid is False
+
+    assert message == (
+        "Only HTTP and HTTPS URLs are supported."
+    )
 
 
 def test_ip_detection():
@@ -53,6 +79,7 @@ def test_suspicious_keyword():
     )
 
     assert "login" in features["suspicious_keywords"]
+
     assert "verify" in features["suspicious_keywords"]
 
 
@@ -62,8 +89,10 @@ def test_risk_engine():
         "http://192.168.1.10/login"
     )
 
-    score, level, reasons = calculate_risk(features)
+    score, level, rules = calculate_risk(features)
 
-    assert score > 0
-    assert level in ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
-    assert len(reasons) > 0
+    assert score == 35
+
+    assert level == "MEDIUM"
+
+    assert len(rules) == 8

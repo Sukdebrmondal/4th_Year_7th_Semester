@@ -50,6 +50,7 @@ def is_ip_address(hostname):
     try:
         ipaddress.ip_address(hostname)
         return True
+
     except ValueError:
         return False
 
@@ -87,6 +88,7 @@ def find_suspicious_keywords(url):
     found = []
 
     for keyword in keywords:
+
         if keyword in url_lower:
             found.append(keyword)
 
@@ -105,6 +107,9 @@ def count_url_depth(path):
 
 def count_special_characters(url):
 
-    special_characters = re.findall(r"[^a-zA-Z0-9]", url)
+    special_characters = re.findall(
+        r"[^a-zA-Z0-9]",
+        url
+    )
 
     return len(special_characters)
