@@ -39,7 +39,16 @@ long long karatsuba(long long x, long long y)
     int n1 = countDigits(x);
     int n2 = countDigits(y);
 
-    int n = (n1 > n2) ? n1 : n2;
+    int n;
+
+    if (n1 > n2)
+    {
+        n = n1;
+    }
+    else
+    {
+        n = n2;
+    }
 
     // Make n even
     if (n % 2 != 0)
