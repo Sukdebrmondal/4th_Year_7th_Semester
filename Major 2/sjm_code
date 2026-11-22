@@ -1,3 +1,16 @@
+1.Singly linked list
+2.Double linked list
+3.Insert two place before a given position
+4.Circular linked list
+5.Tree traversing algorithm(non recursive also) 
+6.Binary search tree(Insertion, Deletion) 
+7.Threaded Binary Tree(Right in threaded, Left in threaded, In order successor) 
+8.AVL Tree
+9.Huffmann TreeMultiway search stream(B-Tree)
+
+
+
+
 Write a C program to implement the Activity Selection Problem using the Greedy Algorithm.
 Write a C program to implement the Breadth-First Search (BFS) algorithm using an array.
 Write a C program to implement the Depth-First Search (DFS) algorithm using an array.
