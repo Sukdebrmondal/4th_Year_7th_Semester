@@ -1,0 +1,16 @@
+Write a C program to implement the Activity Selection Problem using the Greedy Algorithm.
+Write a C program to implement the Breadth-First Search (BFS) algorithm using an array.
+Write a C program to implement the Depth-First Search (DFS) algorithm using an array.
+Write a C program to implement Dijkstra's algorithm using an adjacency matrix.
+ Write a C program to implement the Floyd-Warshall algorithm using an adjacency matrix.
+ Write a C program to implement the Graph Coloring Problem using Backtracking.
+ Write a C program to implement the Hamiltonian Path Problem using Backtracking.
+ Write a C program to implement the Huffman Coding algorithm using Greedy Algorithm( priority queue (min-heap
+ Write a C program to implement the Karatsuba Multiplication Algorithm for multiplying two numbers.
+ Write a C program to implement the Longest Common Subsequence (LCS) algorithm using dynamic programming.
+ Write a C program to implement the Longest Increasing Subsequence (LIS) algorithm using dynamic programming.
+ Write a C program to implement the Maximum Subarray Sum algorithm using divide and conquer approach.
+ Write a C program to implement Prim's algorithm for finding the Minimum Spanning Tree (MST) of a connected, undirected graph represented using an adjacency matrix.
+ Write a C program to implement the Rod Cutting problem using recursion
+ Write a C program to implement the Knuth-Morris-Pratt (KMP) algorithm for string matching.
+ write a C program to implement a Sudoku solver using backtracking algorithm. 
